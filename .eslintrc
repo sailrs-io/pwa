@@ -1,0 +1,3 @@
+{
+    "extends": "@sailrs/eslint-config/typescript",
+}
