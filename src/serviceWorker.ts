@@ -1,35 +1,39 @@
-import { ImageCacheOptions, OfflineFallbackOptions, PageCacheOptions, StaticResourceOptions, offlineFallback, pageCache, staticResourceCache } from "workbox-recipes";
-import { imageCache } from "./recipes/imageCache.js";
+import { registerRoute } from "workbox-routing";
+import { Config } from "./lib/types/routes.js";
+import { WarmCacheArgs } from "./lib/recipes/warmCache.js";
 
-type OfflineCacheConfig = {
-  pageFallback: OfflineFallbackOptions['pageFallback']
-  imageFallback?: OfflineFallbackOptions['imageFallback']
-}
-
-type StaticResourcesCacheConfig = StaticResourceOptions;
-
-export type Config = {
-  imageCache?: ImageCacheOptions
-  offlineCache?: OfflineCacheConfig
-  pageCache?: PageCacheOptions
-  staticResourcesCache?: StaticResourcesCacheConfig
-}
+const isBoolean = (value: any): value is Boolean => typeof value === 'boolean'
 
 export function setupServiceWorker(config: Config = {}) {
-
-  staticResourceCache(config.staticResourcesCache)
-
-  if (config.pageCache) {
-    pageCache(config.pageCache)
+  if (config.recipes?.pageCache) {
+    const opts = isBoolean(config.recipes?.pageCache) ? {} : config.recipes?.pageCache
+    import("./lib/recipes/pageCache.js").then(({ pageCache }) => pageCache(opts))
   }
 
-  // user has to provide a working `pageFallback`. Otherwise a 404 may prevent
-  // worker from registering
-  if (config.offlineCache?.pageFallback) {
-    offlineFallback(config.offlineCache)
+  if (config.recipes?.offlineFallback) {
+    const opts = isBoolean(config.recipes?.offlineFallback) ? {} : config.recipes?.offlineFallback
+    import("./lib/recipes/offlineFallback.js").then(({ offlineFallback }) => offlineFallback(opts))
   }
 
-  if (config.imageCache) {
-    imageCache(config.imageCache)
+  if (config.recipes?.warmCache) {
+    import("./lib/recipes/warmCache.js").then(({ warmCache }) => warmCache(config.recipes?.warmCache as WarmCacheArgs))
+  }
+
+
+  if (config.recipes?.staticResourcesCache) {
+    const opts = isBoolean(config.recipes?.staticResourcesCache) ? {} : config.recipes?.staticResourcesCache
+    import("./lib/recipes/staticResourcesCache.js").then(({ staticResourcesCache }) => staticResourcesCache(opts))
+  }
+
+  if (config.recipes?.imageCache) {
+    const opts = isBoolean(config.recipes?.imageCache) ? {} : config.recipes?.imageCache
+    import("./lib/recipes/imageCache.js").then(({ imageCache }) => imageCache(opts))
+  }
+
+  if (config.caches) {
+    Object.entries(config.caches).forEach(async ([cacheName, options]) => {
+      const strategy = await import("./lib/strategies.js").then(({ getStrategy }) => getStrategy({ cacheName, ...options }))
+      registerRoute(options.match, strategy)
+    })
   }
 }
