@@ -35,11 +35,15 @@
     "@sailrs/eslint-config": "^0.1.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
+    "esbuild": "0.17.14",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.7",
+    "remark": "^14.0.2",
     "tsup": "^6.7.0",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.2",
+    "workbox-core": "^6.5.4"
   },
   "engines": {
     "node": ">=14"
@@ -48,11 +52,19 @@
     "access": "public"
   },
   "dependencies": {
+    "workbox-background-sync": "^6.5.4",
+    "workbox-broadcast-update": "^6.5.4",
     "workbox-cacheable-response": "^6.5.4",
     "workbox-expiration": "^6.5.4",
+    "workbox-range-requests": "^6.5.4",
     "workbox-recipes": "^6.5.4",
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4",
     "workbox-window": "^6.5.4"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
