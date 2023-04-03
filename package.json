@@ -8,24 +8,30 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "node": "./dist/index.cjs",
-      "default": "./dist/index.cjs"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs",
+      "node": "./dist/cjs/index.js",
+      "default": "./dist/cjs/index.js"
     },
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "package.json"
   ],
   "scripts": {
-    "build": "tsup src/index.ts",
-    "dev": "npm run build -- --watch",
-    "tsc": "tsc --project tsconfig.esm.json --watch",
+    "build": "run-p build:*",
+    "build:esm": "esbuild src/index.ts --bundle --format=esm --outdir=dist/esm --minify --splitting",
+    "build:cjs": "esbuild src/index.ts --bundle --format=cjs --outdir=dist/cjs --minify",
+    "build:tsc": "tsc --project tsconfig.json --emitDeclarationOnly",
+    "dev": "npm run prebuild && run-p dev:*",
+    "dev:esm": "esbuild src/index.ts --bundle --format=esm --outdir=dist/esm --sourcemap --watch",
+    "dev:cjs": "esbuild src/index.ts --bundle --format=cjs --outdir=dist/cjs --sourcemap --watch",
+    "dev:tsc": "tsc --project tsconfig.json --emitDeclarationOnly --watch",
     "prebuild": "rm -rf dist",
     "prepare": "npm run build",
     "pretest": "npm run build",
@@ -39,9 +45,9 @@
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.8.7",
     "remark": "^14.0.2",
-    "tsup": "^6.7.0",
     "typescript": "^5.0.2",
     "workbox-core": "^6.5.4"
   },
