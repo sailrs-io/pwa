@@ -36,4 +36,9 @@ export function setupServiceWorker(config: Config = {}) {
       registerRoute(options.match, strategy)
     })
   }
+
+  if (config.pushNotifications) {
+    import("./lib/browser/pushNotifications.js").then(({ pushNotifications }) => pushNotifications(config.pushNotifications))
+  }
+
 }

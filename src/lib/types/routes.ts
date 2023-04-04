@@ -94,4 +94,9 @@ export type Config = {
   caches?: RouteConfig
   /** use preconfigured workbox recipes */
   recipes?: RecipeConfig
+  /** handle push notifications  */
+  pushNotifications?: {
+    /** handler function that receives the PushEvent */
+    onPush: (event: PushEvent) => Promise<void>
+  }
 }
