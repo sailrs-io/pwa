@@ -5,16 +5,16 @@
   "repository": "",
   "author": "Sailrs GmbH",
   "license": "MIT",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.js",
   "type": "module",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.cjs",
-      "node": "./dist/cjs/index.js",
-      "default": "./dist/cjs/index.js"
+      "node": "./dist/cjs/index.cjs",
+      "default": "./dist/cjs/index.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -26,11 +26,11 @@
   "scripts": {
     "build": "run-p build:*",
     "build:esm": "esbuild src/index.ts --bundle --format=esm --outdir=dist/esm --minify --splitting",
-    "build:cjs": "esbuild src/index.ts --bundle --format=cjs --outdir=dist/cjs --minify",
+    "build:cjs": "esbuild src/index.ts --bundle --format=cjs --outfile=dist/cjs/index.cjs --minify",
     "build:tsc": "tsc --project tsconfig.json --emitDeclarationOnly",
     "dev": "npm run prebuild && run-p dev:*",
     "dev:esm": "esbuild src/index.ts --bundle --format=esm --outdir=dist/esm --sourcemap --watch",
-    "dev:cjs": "esbuild src/index.ts --bundle --format=cjs --outdir=dist/cjs --sourcemap --watch",
+    "dev:cjs": "esbuild src/index.ts --bundle --format=cjs --outfile=dist/cjs/index.cjs --sourcemap --watch",
     "dev:tsc": "tsc --project tsconfig.json --emitDeclarationOnly --watch",
     "prebuild": "rm -rf dist",
     "prepare": "npm run build",
