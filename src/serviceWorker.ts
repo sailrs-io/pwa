@@ -41,4 +41,10 @@ export function setupServiceWorker(config: Config = {}) {
     import("./lib/browser/pushNotifications.js").then(({ pushNotifications }) => pushNotifications(config.pushNotifications))
   }
 
+  // register a SKIP_WAITING message handler which can be triggered via Workbox.messageSkipWaiting()
+  (self as unknown as ServiceWorkerGlobalScope).addEventListener('message', (event) => {
+    if (event?.data && event.data?.type === 'SKIP_WAITING') {
+      (self as unknown as ServiceWorkerGlobalScope).skipWaiting()
+    }
+  })
 }
