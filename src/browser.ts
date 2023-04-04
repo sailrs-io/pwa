@@ -5,9 +5,17 @@ import { Workbox } from "workbox-window";
 export type SetupBrowserOptions = {
   /** url to check for the serviceWorker */
   url: string;
+  /** handle the users' choice whether he allows notifications or not */
+  handlePermission?: PermissionCallback;
 }
 
-export function registerServiceWorker(options: SetupBrowserOptions = { url: '/sw.js' }) {
+export async function registerServiceWorker({ url, promptForUpdate, handlePermission }: SetupBrowserOptions = { url: '/sw.js' }) {
+  if ("Notification" in window && handlePermission) {
+    if (Notification.permission !== "denied") {
+      askNotificationPermission(handlePermission);
+    }
+  }
+
   if ('serviceWorker' in navigator) {
     console.log('@sailrs/pwa.registerServiceWorker')
     // @ts-expect-error
