@@ -5,9 +5,9 @@
 convenient way. Pretty much like with workbox itself, you can either use
 `recipes` or configure your service worker completely as you desire.
 
-## Using recipes
+## Using Recipes
 
-For the easiest way to configure your service worker use the code below.
+The easiest way to configure your service worker the following snippet:
 
 ```typescript
 import { setupServiceWorker } from '@sailrs/pwa'
@@ -19,7 +19,7 @@ setupServiceWorker({
     staticResourcesCache: true,
     offlineFallback: {
       pageFallback: 'my-offline-page',
-      imageFallback: 'https://api.lorem.space/image/movie?w=150&h=220',
+      imageFallback: '/assets/fallback.jpg',
     },
     warmCache: {
       urls: [
@@ -31,23 +31,25 @@ setupServiceWorker({
 })
 ```
 
-Except the google fonts cache, this snippets sets up all recipes from the
+Except the google fonts cache, this snippet sets up all recipes from the
 workbox documentation. We take it one step further,  because `@sailrs/pwa`
 enabled you to compose your caching needs which are enabled here too, where
 appropriate. For instance, you cannot change the strategy for `pageCache` but
 all the options, that the NetworkFirst Strategy exposes:
 
 ```
-pageCache: {
-  matchOptions: {
-    ignoreSearch: true,
-    ignoreVary: true,
+recipes: {
+  pageCache: {
+    matchOptions: {
+      ignoreSearch: true,
+      ignoreVary: true,
+    },
+    fetchOptions: {
+      credentials: 'include',
+    },
+    networkTimeoutSeconds: 3,
   },
-  fetchOptions: {
-    credentials: 'include',
-  },
-  networkTimeoutSeconds: 3,
-},
+}
 ```
 
 On the other hand, for the `imageCache` it may make sense to alter the
@@ -85,7 +87,7 @@ warmCache: {
 },
 ```
 
-## custom caching strategies
+## Custom Caching Strategies
 
 Use the `caches` section of the configuration to compose the caches as you like.
 The key becomes the name of the cache.
@@ -103,5 +105,15 @@ const config: Config = {
       ...
     }
   },
+}
+```
+
+## Handling service worker updates
+
+When a new service worker is released
+
+```typescript
+export function promptForUpdate(): Promise<boolean> {
+  return new Promise((res) => res(confirm("Update available. Reload now?")));
 }
 ```

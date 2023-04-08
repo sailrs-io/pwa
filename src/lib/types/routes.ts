@@ -1,9 +1,9 @@
 import { OfflineFallbackOptions } from "workbox-recipes"
-import { WarmCacheArgs } from "../recipes/warmCache.js"
+import { WarmCacheArgs } from "../cache/recipes/warmCache.js"
 import { StrategyConfig } from "./strategies.js"
 import { NetworkFirstOptions } from "workbox-strategies"
-import { StaticResourcesCacheArgs } from "../recipes/staticResourcesCache.js"
-import { ImageCacheArgs } from "../recipes/imageCache.js"
+import { StaticResourcesCacheArgs } from "../cache/recipes/staticResourcesCache.js"
+import { ImageCacheArgs } from "../cache/recipes/imageCache.js"
 
 export type RouteConfig = {
   [key: string]: StrategyConfig

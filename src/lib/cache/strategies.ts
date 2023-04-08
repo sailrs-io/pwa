@@ -1,7 +1,7 @@
 import { CacheFirst, CacheOnly, NetworkFirst, NetworkOnly, StaleWhileRevalidate, } from "workbox-strategies"
 import { getPlugin } from "./plugins.js"
 import { WorkboxPlugin } from "workbox-core/types.js"
-import { Strategies } from "./types/strategies.js"
+import { Strategies } from "../types/strategies.js"
 
 // const strategyPlugins = ['backgroundSync', 'broadcastUpdate', 'cacheableResponses', 'expiration', 'rangeRequests'] as const
 

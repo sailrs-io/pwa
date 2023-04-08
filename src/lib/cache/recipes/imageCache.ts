@@ -1,5 +1,5 @@
 import { Route, registerRoute } from 'workbox-routing';
-import { Strategies } from '../types/strategies.js';
+import { Strategies } from '../../types/strategies.js';
 import { RouteMatchCallback } from 'workbox-core/types.js';
 import { getStrategy } from '../strategies.js';
 

@@ -1,7 +1,7 @@
 import { Route, registerRoute } from 'workbox-routing';
 import { RouteMatchCallback } from 'workbox-core/types.js';
-import { Strategies } from '../types/strategies.js';
-import { getStrategy } from '../strategies.js';
+import { Strategies } from '../../types/strategies.js';
+import { getStrategy } from '../../strategies.js';
 
 const matchCallback: RouteMatchCallback = ({ request }) => request.mode === 'navigate'
 

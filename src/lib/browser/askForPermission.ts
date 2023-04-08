@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API
 
-/** support for safari browser */
+/** legacy support for safari browsers */
 function checkNotificationPromise() {
   try {
     Notification.requestPermission().then();

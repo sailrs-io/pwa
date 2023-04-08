@@ -1,6 +1,6 @@
 import { warmStrategyCache } from 'workbox-recipes';
-import { getStrategy } from '../strategies.js';
-import { Strategy, StrategyConfig } from '../types/strategies.js';
+import { getStrategy } from '../../strategies.js';
+import { Strategy, StrategyConfig } from '../../types/strategies.js';
 
 
 export type WarmCacheArgs = Omit<StrategyConfig, 'strategy' | 'match'> & {

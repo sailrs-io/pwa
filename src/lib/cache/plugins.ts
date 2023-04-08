@@ -3,7 +3,7 @@ import { BroadcastUpdatePlugin } from "workbox-broadcast-update"
 import { CacheableResponsePlugin } from "workbox-cacheable-response"
 import { ExpirationPlugin } from "workbox-expiration"
 import { RangeRequestsPlugin } from "workbox-range-requests"
-import { Plugins } from "./types/plugins.js"
+import { Plugins } from "../types/plugins.js"
 
 export function getPlugin(args: Plugins) {
   switch (args.name) {
