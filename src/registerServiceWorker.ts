@@ -2,8 +2,8 @@ import { Workbox } from 'workbox-window';
 import {
   PermissionCallback,
   askNotificationPermission,
-} from './lib/notifications/askForPermission.js';
-import { registerUpdatePrompt } from './lib/browser/promptForUpdate.js';
+} from './notifications/browser.js';
+import { registerUpdatePrompt } from './lib/registerUpdatePrompt.js';
 
 export type SetupBrowserOptions = {
   /** url to check for the serviceWorker */

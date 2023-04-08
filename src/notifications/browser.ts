@@ -11,9 +11,12 @@ function checkNotificationPromise() {
   return true;
 }
 
-export type PermissionCallback = (permission: NotificationPermission) => void
+export type PermissionCallback = (permission: NotificationPermission) => void;
 
-export function askNotificationPermission(handlePermission: PermissionCallback = () => { }) {
+/** ask the user to allow notifications */
+export function askNotificationPermission(
+  handlePermission: PermissionCallback = () => { },
+) {
   if (checkNotificationPromise()) {
     Notification.requestPermission().then((permission) => {
       handlePermission(permission);

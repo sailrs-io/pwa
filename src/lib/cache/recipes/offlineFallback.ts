@@ -1,4 +1,7 @@
-import { OfflineFallbackOptions, offlineFallback as originalOfflineFallback } from 'workbox-recipes';
+import {
+  OfflineFallbackOptions,
+  offlineFallback as originalOfflineFallback,
+} from 'workbox-recipes';
 import { setDefaultHandler } from 'workbox-routing';
 import { NetworkOnly } from 'workbox-strategies';
 
