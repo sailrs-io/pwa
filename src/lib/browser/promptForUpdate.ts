@@ -1,7 +1,12 @@
-import { Workbox, WorkboxLifecycleWaitingEvent } from "workbox-window";
+import { Workbox, WorkboxLifecycleWaitingEvent } from 'workbox-window';
 
-export function registerUpdatePrompt(wb: Workbox, prompt: () => Promise<boolean>) {
-  const showSkipWaitingPrompt = async (_event: WorkboxLifecycleWaitingEvent) => {
+export function registerUpdatePrompt(
+  wb: Workbox,
+  prompt: () => Promise<boolean>,
+) {
+  const showSkipWaitingPrompt = async (
+    _event: WorkboxLifecycleWaitingEvent,
+  ) => {
     // Assuming the user accepted the update, set up a listener
     // that will reload the page as soon as the previously waiting
     // service worker has taken control.

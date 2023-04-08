@@ -1,6 +1,9 @@
-import { Workbox } from "workbox-window";
-import { PermissionCallback, askNotificationPermission } from "./lib/browser/askForPermission.js";
-import { registerUpdatePrompt } from "./lib/browser/promptForUpdate.js";
+import { Workbox } from 'workbox-window';
+import {
+  PermissionCallback,
+  askNotificationPermission,
+} from './lib/notifications/askForPermission.js';
+import { registerUpdatePrompt } from './lib/browser/promptForUpdate.js';
 
 export type SetupBrowserOptions = {
   /** url to check for the serviceWorker */
@@ -9,11 +12,15 @@ export type SetupBrowserOptions = {
   promptForUpdate?: () => Promise<boolean>;
   /** handle the users' choice whether he allows notifications or not */
   handlePermission?: PermissionCallback;
-}
+};
 
-export async function registerServiceWorker({ url, promptForUpdate, handlePermission }: SetupBrowserOptions = { url: '/sw.js' }) {
-  if ("Notification" in window && handlePermission) {
-    if (Notification.permission !== "denied") {
+export async function registerServiceWorker(
+  { url, promptForUpdate, handlePermission }: SetupBrowserOptions = {
+    url: '/sw.js',
+  },
+) {
+  if ('Notification' in window && handlePermission) {
+    if (Notification.permission !== 'denied') {
       askNotificationPermission(handlePermission);
     }
   }
@@ -22,7 +29,7 @@ export async function registerServiceWorker({ url, promptForUpdate, handlePermis
     window.addEventListener('load', () => {
       const wb = new Workbox(url);
 
-      wb.addEventListener('installed', event => {
+      wb.addEventListener('installed', (event) => {
         if (!event.isUpdate) {
           console.log('Service worker installed for the first time!');
         } else {
@@ -30,7 +37,7 @@ export async function registerServiceWorker({ url, promptForUpdate, handlePermis
         }
       });
 
-      wb.addEventListener('activated', event => {
+      wb.addEventListener('activated', (event) => {
         // `event.isUpdate` will be true if another version of the service
         // worker was controlling the page when this version was registered.
         if (!event.isUpdate) {
@@ -45,15 +52,15 @@ export async function registerServiceWorker({ url, promptForUpdate, handlePermis
       if (promptForUpdate) {
         registerUpdatePrompt(wb, promptForUpdate);
       } else {
-        wb.addEventListener('waiting', _event => {
+        wb.addEventListener('waiting', (_event) => {
           console.debug(
             `A new service worker has installed, but it can't activate` +
-            `until all tabs running the current version have fully unloaded.`
+            `until all tabs running the current version have fully unloaded.`,
           );
         });
       }
 
-      wb.addEventListener('message', event => {
+      wb.addEventListener('message', (event) => {
         if (event.data.type === 'CACHE_UPDATED') {
           const { updatedURL } = event.data.payload;
           console.debug(`A newer version of ${updatedURL} is available!`);
@@ -61,6 +68,6 @@ export async function registerServiceWorker({ url, promptForUpdate, handlePermis
       });
 
       wb.register();
-    })
+    });
   }
 }
