@@ -1,44 +1,50 @@
 import { registerRoute } from "workbox-routing";
 import { Config } from "./lib/types/routes.js";
-import { WarmCacheArgs } from "./lib/cache/recipes/warmCache.js";
+import { WarmCacheArgs, warmCache } from "./lib/cache/recipes/warmCache.js";
+import { offlineFallback } from "./lib/cache/recipes/offlineFallback.js";
+import { pageCache } from "./lib/cache/recipes/pageCache.js";
+import { staticResourcesCache } from "./lib/cache/recipes/staticResourcesCache.js";
+import { imageCache } from "./lib/cache/recipes/imageCache.js";
+import { getStrategy } from "./lib/cache/strategies.js";
+import { pushNotifications } from "./lib/browser/pushNotifications.js";
 
 const isBoolean = (value: any): value is Boolean => typeof value === 'boolean'
 
 export function setupServiceWorker(config: Config = {}) {
   if (config.recipes?.pageCache) {
     const opts = isBoolean(config.recipes?.pageCache) ? {} : config.recipes?.pageCache
-    import("./lib/cache/recipes/pageCache.js").then(({ pageCache }) => pageCache(opts))
+    pageCache(opts)
   }
 
   if (config.recipes?.offlineFallback) {
     const opts = isBoolean(config.recipes?.offlineFallback) ? {} : config.recipes?.offlineFallback
-    import("./lib/cache/recipes/offlineFallback.js").then(({ offlineFallback }) => offlineFallback(opts))
+    offlineFallback(opts)
   }
 
   if (config.recipes?.warmCache) {
-    import("./lib/cache/recipes/warmCache.js").then(({ warmCache }) => warmCache(config.recipes?.warmCache as WarmCacheArgs))
+    warmCache(config.recipes?.warmCache as WarmCacheArgs)
   }
 
 
   if (config.recipes?.staticResourcesCache) {
     const opts = isBoolean(config.recipes?.staticResourcesCache) ? {} : config.recipes?.staticResourcesCache
-    import("./lib/cache/recipes/staticResourcesCache.js").then(({ staticResourcesCache }) => staticResourcesCache(opts))
+    staticResourcesCache(opts)
   }
 
   if (config.recipes?.imageCache) {
     const opts = isBoolean(config.recipes?.imageCache) ? {} : config.recipes?.imageCache
-    import("./lib/cache/recipes/imageCache.js").then(({ imageCache }) => imageCache(opts))
+    imageCache(opts)
   }
 
   if (config.caches) {
     Object.entries(config.caches).forEach(async ([cacheName, options]) => {
-      const strategy = await import("./lib/cache/strategies.js").then(({ getStrategy }) => getStrategy({ cacheName, ...options }))
+      const strategy = getStrategy({ cacheName, ...options })
       registerRoute(options.match, strategy)
     })
   }
 
   if (config.pushNotifications) {
-    import("./lib/browser/pushNotifications.js").then(({ pushNotifications }) => pushNotifications(config.pushNotifications))
+    pushNotifications(config.pushNotifications)
   }
 
   // register a SKIP_WAITING message handler which can be triggered via Workbox.messageSkipWaiting()
