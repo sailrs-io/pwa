@@ -1,7 +1,7 @@
 import { Route, registerRoute } from 'workbox-routing';
 import { RouteMatchCallback } from 'workbox-core/types.js';
 import { StrategyConfig } from '../../types/strategies.js';
-import { getStrategy } from '../../strategies.js';
+import { getStrategy } from '../strategies.js';
 
 const matchCallback: RouteMatchCallback = ({ request }) =>
   // CSS
