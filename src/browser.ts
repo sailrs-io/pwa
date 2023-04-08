@@ -1,5 +1,6 @@
 import { Workbox } from "workbox-window";
 import { PermissionCallback, askNotificationPermission } from "./lib/browser/askForPermission.js";
+import { registerUpdatePrompt } from "./lib/browser/promptForUpdate.js";
 
 export type SetupBrowserOptions = {
   /** url to check for the serviceWorker */
@@ -42,9 +43,7 @@ export async function registerServiceWorker({ url, promptForUpdate, handlePermis
       });
 
       if (promptForUpdate) {
-        import('./lib/browser/promptForUpdate.js').then(({ registerUpdatePrompt }) => {
-          registerUpdatePrompt(wb, promptForUpdate);
-        })
+        registerUpdatePrompt(wb, promptForUpdate);
       } else {
         wb.addEventListener('waiting', _event => {
           console.debug(
