@@ -2,21 +2,34 @@
   "name": "@sailrs/pwa",
   "version": "0.2.1",
   "description": "PWA for Sailrs",
-  "repository": "",
+  "repository": "https://github.com/sailrs-io/pwa",
   "author": "Sailrs GmbH",
   "license": "MIT",
-  "main": "dist/cjs/index.cjs",
-  "module": "dist/esm/index.js",
-  "type": "module",
-  "types": "./dist/types/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.cjs",
-      "node": "./dist/cjs/index.cjs",
-      "default": "./dist/cjs/index.cjs"
+      "default": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./notifications": {
+      "default": "./dist/notifications/index.js",
+      "import": "./dist/notifications/index.mjs",
+      "types": "./dist/notifications/index.d.ts"
     },
     "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/index.d.ts"
+      ],
+      "notifications": [
+        "dist/notifications/index.d.ts"
+      ]
+    }
   },
   "files": [
     "dist",
@@ -24,32 +37,23 @@
     "package.json"
   ],
   "scripts": {
-    "build": "run-p build:*",
-    "build:esm": "esbuild src/index.ts --bundle --format=esm --outdir=dist/esm --minify --splitting",
-    "build:cjs": "esbuild src/index.ts --bundle --format=cjs --outfile=dist/cjs/index.cjs --minify",
-    "build:tsc": "tsc --project tsconfig.json --emitDeclarationOnly",
-    "dev": "npm run prebuild && run-p dev:*",
-    "dev:esm": "esbuild src/index.ts --bundle --format=esm --outdir=dist/esm --sourcemap --watch",
-    "dev:cjs": "esbuild src/index.ts --bundle --format=cjs --outfile=dist/cjs/index.cjs --sourcemap --watch",
-    "dev:tsc": "tsc --project tsconfig.json --emitDeclarationOnly --watch",
-    "prebuild": "rm -rf dist",
+    "build": "tsup",
+    "dev": "npm run build -- --watch src",
     "prepare": "npm run build",
     "pretest": "npm run build",
-    "posttest": "npm run lint"
+    "posttest": "npm run lint",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@sailrs/eslint-config": "^0.1.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
-    "esbuild": "0.17.14",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "npm-run-all": "^4.1.5",
     "prettier": "^2.8.7",
-    "remark": "^14.0.2",
-    "typescript": "^5.0.2",
-    "workbox-core": "^6.5.4"
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
   },
   "engines": {
     "node": ">=14"
@@ -60,6 +64,7 @@
   "dependencies": {
     "workbox-background-sync": "^6.5.4",
     "workbox-broadcast-update": "^6.5.4",
+    "workbox-core": "^6.5.4",
     "workbox-cacheable-response": "^6.5.4",
     "workbox-expiration": "^6.5.4",
     "workbox-range-requests": "^6.5.4",
