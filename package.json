@@ -1,44 +1,48 @@
 {
   "name": "@sailrs/pwa",
+  "author": "Sailrs GmbH",
   "version": "0.2.2",
   "description": "PWA for Sailrs",
-  "repository": "https://github.com/sailrs-io/pwa",
-  "author": "Sailrs GmbH",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "default": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    },
-    "./notifications": {
-      "default": "./dist/notifications/index.js",
-      "import": "./dist/notifications/index.mjs",
-      "types": "./dist/notifications/index.d.ts"
-    },
-    "./package.json": "./package.json"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sailrs-io/pwa"
   },
+  "keywords": [
+    "pwa",
+    "sailrs",
+    "service-worker",
+    "workbox"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.mjs",
+  "types": "index.d.ts",
   "typesVersions": {
-    "*": {
-      ".": [
-        "dist/index.d.ts"
-      ],
-      "notifications": [
-        "dist/notifications/index.d.ts"
+    ">=4.0": {
+      "*": [
+        "dist/types/*"
       ]
     }
   },
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist",
+    "CHANGELOG.md",
     "README.md",
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "npm run build -- --watch src",
+    "build": "run-s build:clean build:code build:types",
+    "build:clean": "rimraf dist",
+    "build:code": "tsx ./build.ts",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
     "prepare": "npm run build",
     "pretest": "npm run build",
     "posttest": "npm run lint",
@@ -48,11 +52,14 @@
     "@sailrs/eslint-config": "^0.1.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
+    "esbuild": "0.17.16",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "glob": "^10.1.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.8.7",
-    "tsup": "^6.7.0",
+    "tsx": "^3.12.6",
     "typescript": "^5.0.4"
   },
   "engines": {
@@ -64,8 +71,8 @@
   "dependencies": {
     "workbox-background-sync": "^6.5.4",
     "workbox-broadcast-update": "^6.5.4",
-    "workbox-core": "^6.5.4",
     "workbox-cacheable-response": "^6.5.4",
+    "workbox-core": "^6.5.4",
     "workbox-expiration": "^6.5.4",
     "workbox-range-requests": "^6.5.4",
     "workbox-recipes": "^6.5.4",
