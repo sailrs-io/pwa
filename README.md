@@ -37,7 +37,7 @@ enabled you to compose your caching needs which are enabled here too, where
 appropriate. For instance, you cannot change the strategy for `pageCache` but
 all the options, that the NetworkFirst Strategy exposes:
 
-```
+```typescript
 recipes: {
   pageCache: {
     matchOptions: {
@@ -55,7 +55,7 @@ recipes: {
 On the other hand, for the `imageCache` it may make sense to alter the
 `matchCallback` or the plugins.
 
-```
+```typescript
 imageCache: {
   match: ({ request }) => request.destination === 'image',
   expiration: {
@@ -70,7 +70,7 @@ imageCache: {
 
 On the `warmCache` you can also change the strategy and plugins.
 
-```
+```typescript
 warmCache: {
   strategy: 'staleWhileRevalidate',
   urls: [
