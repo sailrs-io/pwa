@@ -43,6 +43,7 @@
     "build:clean": "rimraf dist",
     "build:code": "tsx ./build.ts",
     "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
+    "lint": "eslint src",
     "prepare": "npm run build",
     "pretest": "npm run build",
     "posttest": "npm run lint",
@@ -82,7 +83,6 @@
   },
   "prettier": {
     "printWidth": 80,
-    "singleQuote": true,
     "trailingComma": "all"
   }
 }

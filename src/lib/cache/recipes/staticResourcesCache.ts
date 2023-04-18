@@ -1,14 +1,14 @@
-import { Route, registerRoute } from 'workbox-routing';
-import { RouteMatchCallback } from 'workbox-core/types.js';
-import { StrategyConfig, getStrategy } from '../strategies.js';
+import { Route, registerRoute } from "workbox-routing";
+import { RouteMatchCallback } from "workbox-core/types.js";
+import { StrategyConfig, getStrategy } from "../strategies.js";
 
 const matchCallback: RouteMatchCallback = ({ request }) =>
   // CSS
-  request.destination === 'style' ||
+  request.destination === "style" ||
   // JavaScript
-  request.destination === 'script' ||
+  request.destination === "script" ||
   // Web Workers
-  request.destination === 'worker';
+  request.destination === "worker";
 
 const cacheableResponses = {
   statuses: [0, 200],
@@ -16,15 +16,15 @@ const cacheableResponses = {
 
 export type StaticResourcesCacheArgs = Omit<
   StrategyConfig,
-  'strategy' | 'match'
+  "strategy" | "match"
 > & {
   match?: string | RegExp | Route | RouteMatchCallback;
 };
 
 export function staticResourcesCache(config: StaticResourcesCacheArgs) {
   const strategy = getStrategy({
-    strategy: 'staleWhileRevalidate',
-    cacheName: 'static-resources',
+    strategy: "staleWhileRevalidate",
+    cacheName: "static-resources",
     cacheableResponses: config.cacheableResponses || cacheableResponses,
     ...config,
   });

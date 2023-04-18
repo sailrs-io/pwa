@@ -1,2 +1,2 @@
-export * from './browser.js';
-export * from './serviceWorker.js';
+export * from "./browser.js";
+export * from "./serviceWorker.js";

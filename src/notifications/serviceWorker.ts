@@ -14,20 +14,20 @@ export function pushNotifications({
   onNotificationClick,
 }: PushNotificationsConfig = {}) {
   if (onPush) {
-    const handle = typeof onPush === 'function' ? onPush : handlePush;
+    const handle = typeof onPush === "function" ? onPush : handlePush;
     (self as unknown as ServiceWorkerGlobalScope).addEventListener(
-      'push',
+      "push",
       (event) => event.waitUntil(handle(event)),
     );
   }
 
   if (onNotificationClick) {
     const handle =
-      typeof onNotificationClick === 'function'
+      typeof onNotificationClick === "function"
         ? onNotificationClick
         : handleClick;
     (self as unknown as ServiceWorkerGlobalScope).addEventListener(
-      'notificationclick',
+      "notificationclick",
       (event) => event.waitUntil(handle(event)),
     );
   }

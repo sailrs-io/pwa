@@ -1,4 +1,4 @@
-import { Workbox, WorkboxLifecycleWaitingEvent } from 'workbox-window';
+import { Workbox, WorkboxLifecycleWaitingEvent } from "workbox-window";
 
 export function registerUpdatePrompt(
   wb: Workbox,
@@ -10,7 +10,7 @@ export function registerUpdatePrompt(
     // Assuming the user accepted the update, set up a listener
     // that will reload the page as soon as the previously waiting
     // service worker has taken control.
-    wb.addEventListener('controlling', () => {
+    wb.addEventListener("controlling", () => {
       // At this point, reloading will ensure that the current
       // tab is loaded under the control of the new service worker.
       // Depending on your web app, you may want to auto-save or
@@ -36,7 +36,7 @@ export function registerUpdatePrompt(
 
   // Add an event listener to detect when the registered
   // service worker has installed but is waiting to activate.
-  wb.addEventListener('waiting', (event) => {
+  wb.addEventListener("waiting", (event) => {
     showSkipWaitingPrompt(event);
   });
 }

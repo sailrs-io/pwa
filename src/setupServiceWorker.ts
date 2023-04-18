@@ -1,13 +1,20 @@
-import { registerRoute } from 'workbox-routing';
-import { WarmCacheArgs, warmCache } from './lib/cache/recipes/warmCache.js';
-import { offlineFallback } from './lib/cache/recipes/offlineFallback.js';
-import { pageCache } from './lib/cache/recipes/pageCache.js';
-import { StaticResourcesCacheArgs, staticResourcesCache } from './lib/cache/recipes/staticResourcesCache.js';
-import { ImageCacheArgs, imageCache } from './lib/cache/recipes/imageCache.js';
-import { StrategyConfig, getStrategy } from './lib/cache/strategies.js';
-import { PushNotificationsConfig, pushNotifications } from './notifications/serviceWorker.js';
-import { OfflineFallbackOptions } from 'workbox-recipes';
-import { NetworkFirstOptions } from 'workbox-strategies';
+import { registerRoute } from "workbox-routing";
+import { WarmCacheArgs, warmCache } from "./lib/cache/recipes/warmCache.js";
+import { offlineFallback } from "./lib/cache/recipes/offlineFallback.js";
+import { pageCache } from "./lib/cache/recipes/pageCache.js";
+import {
+  StaticResourcesCacheArgs,
+  staticResourcesCache,
+} from "./lib/cache/recipes/staticResourcesCache.js";
+import { ImageCacheArgs, imageCache } from "./lib/cache/recipes/imageCache.js";
+import { StrategyConfig, getStrategy } from "./lib/cache/strategies.js";
+import {
+  PushNotificationsConfig,
+  pushNotifications,
+} from "./notifications/serviceWorker.js";
+
+import { OfflineFallbackOptions } from "workbox-recipes";
+import { NetworkFirstOptions } from "workbox-strategies";
 
 type RouteConfig = {
   [key: string]: StrategyConfig;
@@ -32,7 +39,7 @@ type RecipeConfig = {
    *
    * @see https://developer.chrome.com/docs/workbox/modules/workbox-recipes/#image-cache
    */
-  imageCache?: Boolean | ImageCacheArgs;
+  imageCache?: boolean | ImageCacheArgs;
 
   /**
    * offlineFallback recipe
@@ -60,7 +67,7 @@ type RecipeConfig = {
    *
    * @see https://developer.chrome.com/docs/workbox/modules/workbox-recipes/#page-cache
    */
-  pageCache?: Boolean | NetworkFirstOptions;
+  pageCache?: boolean | NetworkFirstOptions;
 
   /**
    * staticResourcesCache recipe
@@ -77,7 +84,7 @@ type RecipeConfig = {
    *
    * @see https://developer.chrome.com/docs/workbox/modules/workbox-recipes/#static-resources-cache
    */
-  staticResourcesCache?: Boolean | StaticResourcesCacheArgs;
+  staticResourcesCache?: boolean | StaticResourcesCacheArgs;
 
   /**
    * warmCache recipe
@@ -101,7 +108,7 @@ export type Config = {
   /** handle push notifications  */
   pushNotifications?: PushNotificationsConfig;
 };
-const isBoolean = (value: any): value is Boolean => typeof value === 'boolean';
+const isBoolean = (value: any): value is boolean => typeof value === "boolean";
 
 export function setupServiceWorker(config: Config = {}) {
   if (config.recipes?.pageCache) {
@@ -149,9 +156,9 @@ export function setupServiceWorker(config: Config = {}) {
 
   // register a SKIP_WAITING message handler which can be triggered via Workbox.messageSkipWaiting()
   (self as unknown as ServiceWorkerGlobalScope).addEventListener(
-    'message',
+    "message",
     (event) => {
-      if (event?.data && event.data?.type === 'SKIP_WAITING') {
+      if (event?.data && event.data?.type === "SKIP_WAITING") {
         (self as unknown as ServiceWorkerGlobalScope).skipWaiting();
       }
     },
