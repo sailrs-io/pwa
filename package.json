@@ -51,9 +51,11 @@
     "prepare": "npm run build",
     "pretest": "npm run build",
     "posttest": "npm run lint",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "release": "release-it"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^5.1.1",
     "@sailrs/eslint-config": "^0.1.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
@@ -64,6 +66,7 @@
     "glob": "^10.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.7",
+    "release-it": "^15.10.1",
     "tsx": "^3.12.6",
     "typescript": "^5.0.4"
   },
