@@ -1,3 +1,7 @@
+
+
+### 0.3.1 (2023-04-20)
+
 # Changelog
 
 ## [0.3.0](https://github.com/sailrs-io/pwa/compare/v0.2.2...v0.3.0) (2023-04-17)
