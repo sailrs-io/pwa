@@ -1,2 +1,1 @@
-export * from "./registerServiceWorker.js";
-export * from "./setupServiceWorker.js";
+export * from "./lib";
