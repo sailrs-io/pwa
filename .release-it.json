@@ -5,7 +5,7 @@
   },
   "hooks": {
     "before:init": "npm run test",
-    "after:bump": "yarn build"
+    "after:bump": "npm run build"
   },
   "github": {
     "release": true
