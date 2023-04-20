@@ -126,7 +126,7 @@ export function setupServiceWorker(config: Config = {}) {
   }
 
   if (config.recipes?.warmCache) {
-    warmCache(config.recipes?.warmCache as WarmCacheArgs);
+    warmCache(config.recipes?.warmCache);
   }
 
   if (config.recipes?.staticResourcesCache) {
