@@ -50,7 +50,7 @@
     "lint": "eslint src",
     "test": "echo \"no test specified\"",
     "prepare": "npm run build",
-    "pretest": "npm run build && npm run lint",
+    "pretest": "npm run build",
     "prepublishOnly": "npm run build",
     "release": "release-it"
   },
