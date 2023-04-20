@@ -4,9 +4,9 @@ import { handleClick, handlePush } from "./utils";
 
 export type PushNotificationsConfig = {
   /** */
-  onPush?: Boolean | ((event: PushEvent) => Promise<void>);
+  onPush?: boolean | ((event: PushEvent) => Promise<void>);
   /** */
-  onNotificationClick?: Boolean | ((event: NotificationEvent) => Promise<void>);
+  onNotificationClick?: boolean | ((event: NotificationEvent) => Promise<void>);
 };
 
 export function pushNotifications({

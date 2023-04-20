@@ -1,0 +1,22 @@
+{
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "requiredBranch": "main"
+  },
+  "hooks": {
+    "before:init": "npm run test",
+    "after:bump": "yarn build"
+  },
+  "github": {
+    "release": true
+  },
+  "npm": {
+    "release": true
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "conventionalcommits",
+      "infile": "CHANGELOG.md"
+    }
+  }
+}

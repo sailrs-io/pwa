@@ -1,0 +1,12 @@
+name: Release
+on: workflow_dispatch
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm ci
+      - name: End message
+        run: echo "All done!"
