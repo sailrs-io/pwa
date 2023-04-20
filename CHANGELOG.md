@@ -1,5 +1,12 @@
 
 
+### 0.3.2 (2023-04-20)
+
+
+### Bug Fixes
+
+* export submodules ([174026c](https://github.com/sailrs-io/pwa/commit/174026ce27ee2c244144d1809e003c7e65356efc))
+
 ### [0.3.1](https://github.com/sailrs-io/pwa/compare/v0.3.0...v0.3.1) (2023-04-20)
 
 # Changelog
