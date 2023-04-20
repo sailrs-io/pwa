@@ -1,11 +1,10 @@
-name: dependabot
-
 version: 2
+
 updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - package-ecosystem: "github-actions"
     directory: "/"
