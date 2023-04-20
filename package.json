@@ -41,8 +41,12 @@
   "scripts": {
     "build": "run-s build:clean build:code build:types",
     "build:clean": "rimraf dist",
-    "build:code": "tsx ./build.ts",
+    "build:code": "NODE_ENV=production tsx ./build.ts",
     "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
+    "dev": "run-s dev:clean dev:code dev:types",
+    "dev:clean": "rimraf dist",
+    "dev:code": "tsx ./build.ts",
+    "dev:types": "tsc --emitDeclarationOnly --outDir dist/types",
     "lint": "eslint src",
     "prepare": "npm run build",
     "pretest": "npm run build",
