@@ -25,6 +25,5 @@ esbuild.buildSync({
   minify: isProduction,
   sourcemap: !isProduction,
   splitting: true,
-  outExtension: { ".js": ".mjs" },
   target,
 });

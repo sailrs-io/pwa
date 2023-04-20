@@ -1,17 +1,17 @@
 import { registerRoute } from "workbox-routing";
-import { WarmCacheArgs, warmCache } from "./lib/cache/recipes/warmCache.js";
-import { offlineFallback } from "./lib/cache/recipes/offlineFallback.js";
-import { pageCache } from "./lib/cache/recipes/pageCache.js";
+import { WarmCacheArgs, warmCache } from "./cache/recipes/warmCache.js";
+import { offlineFallback } from "./cache/recipes/offlineFallback.js";
+import { pageCache } from "./cache/recipes/pageCache.js";
 import {
   StaticResourcesCacheArgs,
   staticResourcesCache,
-} from "./lib/cache/recipes/staticResourcesCache.js";
-import { ImageCacheArgs, imageCache } from "./lib/cache/recipes/imageCache.js";
-import { StrategyConfig, getStrategy } from "./lib/cache/strategies.js";
+} from "./cache/recipes/staticResourcesCache.js";
+import { ImageCacheArgs, imageCache } from "./cache/recipes/imageCache.js";
+import { StrategyConfig, getStrategy } from "./cache/strategies.js";
 import {
   PushNotificationsConfig,
   pushNotifications,
-} from "./notifications/serviceWorker.js";
+} from "../notifications/serviceWorker.js";
 
 import { OfflineFallbackOptions } from "workbox-recipes";
 import { NetworkFirstOptions } from "workbox-strategies";
