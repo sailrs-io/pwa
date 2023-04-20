@@ -15,7 +15,7 @@ export type PermissionCallback = (permission: NotificationPermission) => void;
 
 /** ask the user to allow notifications */
 export function askNotificationPermission(
-  handlePermission: PermissionCallback = () => { },
+  handlePermission: PermissionCallback = () => {},
 ) {
   if (checkNotificationPromise()) {
     Notification.requestPermission().then((permission) => {

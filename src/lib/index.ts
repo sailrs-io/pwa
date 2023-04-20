@@ -1,1 +1,1 @@
-export * from './registerUpdatePrompt.js';
+export * from "./registerUpdatePrompt.js";

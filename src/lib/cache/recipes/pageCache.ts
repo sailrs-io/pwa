@@ -1,11 +1,11 @@
-import { Route, registerRoute } from 'workbox-routing';
-import { RouteMatchCallback } from 'workbox-core/types.js';
-import { Strategies, getStrategy } from '../strategies.js';
+import { Route, registerRoute } from "workbox-routing";
+import { RouteMatchCallback } from "workbox-core/types.js";
+import { Strategies, getStrategy } from "../strategies.js";
 
 const matchCallback: RouteMatchCallback = ({ request }) =>
-  request.mode === 'navigate';
+  request.mode === "navigate";
 
-export type PageCacheArgs = Omit<Strategies, 'strategy' | 'match'> & {
+export type PageCacheArgs = Omit<Strategies, "strategy" | "match"> & {
   match?: string | RegExp | Route | RouteMatchCallback;
 };
 
@@ -15,8 +15,8 @@ const cacheableResponses = {
 
 export function pageCache(config: PageCacheArgs) {
   const strategy = getStrategy({
-    cacheName: 'pages',
-    strategy: 'networkFirst',
+    cacheName: "pages",
+    strategy: "networkFirst",
     networkTimeoutSeconds: 3,
     cacheableResponses: config.cacheableResponses || cacheableResponses,
     ...config,

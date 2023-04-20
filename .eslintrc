@@ -1,3 +1,6 @@
 {
-    "extends": "@sailrs/eslint-config/typescript"
+    "extends": "@sailrs/eslint-config/typescript",
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    }
 }

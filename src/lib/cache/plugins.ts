@@ -1,37 +1,37 @@
-import { BackgroundSyncPlugin } from 'workbox-background-sync';
-import { BroadcastUpdatePlugin } from 'workbox-broadcast-update';
-import { CacheableResponsePlugin } from 'workbox-cacheable-response';
-import { ExpirationPlugin } from 'workbox-expiration';
-import { RangeRequestsPlugin } from 'workbox-range-requests';
+import { BackgroundSyncPlugin } from "workbox-background-sync";
+import { BroadcastUpdatePlugin } from "workbox-broadcast-update";
+import { CacheableResponsePlugin } from "workbox-cacheable-response";
+import { ExpirationPlugin } from "workbox-expiration";
+import { RangeRequestsPlugin } from "workbox-range-requests";
 
-import { QueueOptions } from 'workbox-background-sync';
-import { BroadcastCacheUpdateOptions } from 'workbox-broadcast-update';
-import { CacheableResponseOptions } from 'workbox-cacheable-response';
-import { ExpirationPluginOptions } from 'workbox-expiration';
+import { QueueOptions } from "workbox-background-sync";
+import { BroadcastCacheUpdateOptions } from "workbox-broadcast-update";
+import { CacheableResponseOptions } from "workbox-cacheable-response";
+import { ExpirationPluginOptions } from "workbox-expiration";
 
 export type BackgroundSync = {
-  name: 'backgroundSync';
+  name: "backgroundSync";
   queueName?: string;
   options?: QueueOptions;
 };
 
 export type BroadcastUpdate = {
-  name: 'broadcastUpdate';
+  name: "broadcastUpdate";
   options?: BroadcastCacheUpdateOptions;
 };
 
 export type CacheableResponses = {
-  name: 'cacheableResponses';
+  name: "cacheableResponses";
   options: CacheableResponseOptions;
 };
 
 export type Expiration = {
-  name: 'expiration';
+  name: "expiration";
   options?: ExpirationPluginOptions;
 };
 
 export type RangeRequests = {
-  name: 'rangeRequests';
+  name: "rangeRequests";
 };
 
 export type Plugins =
@@ -51,18 +51,18 @@ export type PluginOptions = {
 
 export function getPlugin(args: Plugins) {
   switch (args.name) {
-    case 'backgroundSync':
+    case "backgroundSync":
       return new BackgroundSyncPlugin(
-        args.queueName || 'retryQueue',
+        args.queueName || "retryQueue",
         args.options,
       );
-    case 'broadcastUpdate':
+    case "broadcastUpdate":
       return new BroadcastUpdatePlugin(args.options);
-    case 'cacheableResponses':
+    case "cacheableResponses":
       return new CacheableResponsePlugin(args.options);
-    case 'expiration':
+    case "expiration":
       return new ExpirationPlugin(args.options);
-    case 'rangeRequests':
+    case "rangeRequests":
       return new RangeRequestsPlugin();
   }
 }

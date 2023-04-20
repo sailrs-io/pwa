@@ -17,6 +17,3 @@
 * bundling with esbuild ([7d68240](https://github.com/sailrs-io/pwa/commit/7d682409acc398a6713e779dcc5830eca466faca))
 * imports ([d3192a4](https://github.com/sailrs-io/pwa/commit/d3192a407bbba5483454eca3d9c7156e54463af0))
 * workflows ([93e72aa](https://github.com/sailrs-io/pwa/commit/93e72aa50ce063ed48f86242a5e55960e3b301a0))
-
-CHANGELOG
-=========
