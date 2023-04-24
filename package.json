@@ -65,7 +65,7 @@
     "@sailrs/eslint-config": "^0.1.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
-    "esbuild": "0.17.17",
+    "esbuild": "0.17.18",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
