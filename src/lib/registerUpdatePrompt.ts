@@ -36,7 +36,7 @@ export function registerUpdatePrompt(
 
   // Add an event listener to detect when the registered
   // service worker has installed but is waiting to activate.
-  wb.addEventListener("waiting", (event) => {
-    showSkipWaitingPrompt(event);
+  wb.addEventListener("waiting", async (event) => {
+    await showSkipWaitingPrompt(event);
   });
 }
