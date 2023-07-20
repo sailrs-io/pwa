@@ -1,3 +1,12 @@
+
+
+### 0.3.3 (2023-07-20)
+
+
+### Bug Fixes
+
+* await showSkipWaitingPrompt ([0f5d5b5](https://github.com/sailrs-io/pwa/commit/0f5d5b58b5b3d5c4697c853f17cfa932953ce0cd))
+
 # Changelog
 
 ### 0.3.2 (2023-04-20)
