@@ -85,7 +85,7 @@
   "dependencies": {
     "workbox-background-sync": "^6.5.4",
     "workbox-broadcast-update": "^6.5.4",
-    "workbox-cacheable-response": "^6.5.4",
+    "workbox-cacheable-response": "^7.0.0",
     "workbox-core": "^6.5.4",
     "workbox-expiration": "^6.5.4",
     "workbox-range-requests": "^6.5.4",
